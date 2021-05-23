@@ -55,12 +55,12 @@ import './App.css'
      if (querytexts!=='') {  
      await BooksAPI.search(querytexts).then(res => {
 
-
+      if (res.error !== 'empty query') 
       res = res.map((book) => {
-        const oldbook = books.find(({ id }) => book.id === id);
+        const newbooks = books.find(({ id }) => book.id === id);
         return {
           ...book,
-          shelf: oldbook?.shelf ?? 'none',
+          shelf: newbooks?.shelf ?? 'none',
         }
       })
       setquery(res)})
