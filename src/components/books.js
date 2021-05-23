@@ -21,14 +21,14 @@ export default function Books({ books, shelves ,onChange}) {
             ></div>
   
   <div className="book-shelf-changer">
-  <select   value={books.shelf|| "None" } onChange={handleChange}>
+  <select   value={books.shelf|| "read" } onChange={handleChange}>
   <option value="move" disabled>
                 Move to...
               </option>
              {// console.log(shelves)
              }
               {shelves.map(shelf => (
-                <option key={shelf} value={shelf}>
+                <option key={shelf} value={shelf } >
                   {startCase(shelf)}
                 </option>
               ))}

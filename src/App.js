@@ -22,8 +22,7 @@ import './App.css'
 
   const [books, setbooks] = useState([]);
   const [query, setquery] = useState([]);
-  let [querytext, setqueryText] = useState('m');
-
+ 
   const shelves=["read","wantToRead","currentlyReading"];
 
 
@@ -50,12 +49,14 @@ import './App.css'
   
    async function handleChanges (e) {
 
-     setqueryText(e.target.value);
+      let querytexts= e.target.value
      
-
-     await BooksAPI.search(querytext).then(res => {
-      setquery(res)
-    })
+     
+     if (querytexts!=='') {  
+     await BooksAPI.search(querytexts).then(res => {
+      setquery(res)})
+       console.log(e.target.value)
+    }
         
 
    };
@@ -94,7 +95,6 @@ import './App.css'
  <div className="search-books-results">
   
  
-</div></div>
   <ol className="books-grid  ">
 
   { (query.error !== 'empty query') ? (
@@ -112,6 +112,7 @@ import './App.css'
        <div>nodata</div>
        )   }
           </ol>
+          </div></div>
           </Route>
 
 
