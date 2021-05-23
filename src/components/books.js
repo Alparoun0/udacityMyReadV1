@@ -21,7 +21,7 @@ export default function Books({ books, shelves ,onChange}) {
             ></div>
   
   <div className="book-shelf-changer">
-  <select   value={books.shelf|| "read" } onChange={handleChange}>
+  <select   value={books.shelf || "read" } onChange={handleChange}>
   <option value="move" disabled>
                 Move to...
               </option>

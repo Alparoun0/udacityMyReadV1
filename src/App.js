@@ -54,7 +54,17 @@ import './App.css'
      
      if (querytexts!=='') {  
      await BooksAPI.search(querytexts).then(res => {
+
+
+      res = res.map((book) => {
+        const oldbook = books.find(({ id }) => book.id === id);
+        return {
+          ...book,
+          shelf: oldbook?.shelf ?? 'none',
+        }
+      })
       setquery(res)})
+      
        console.log(e.target.value)
     }
         
@@ -116,7 +126,7 @@ import './App.css'
           </Route>
 
 
-          <Route   path="/">
+          <Route  exact path="/">
       
         <BookShelves shelves={shelves} books={books} updateBook={changeShelf}  />
        
