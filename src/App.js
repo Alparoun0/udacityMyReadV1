@@ -88,8 +88,7 @@ import './App.css'
    async function handleChanges (e) {
 
     setquerytext(e.target.value)
-     
-     
+      
      if (querytext!=='') {  
 
      await BooksAPI.search(querytext).then(res => {
@@ -105,8 +104,8 @@ import './App.css'
       setquery(res)})
       
        //console.log(e.target.value)
-    }
-        
+    }  
+    if (e.target.value==="")setquery([])
 
    };
    //console.log("query text",querytext)
