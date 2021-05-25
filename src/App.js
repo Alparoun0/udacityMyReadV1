@@ -22,7 +22,8 @@ import './App.css'
 
   const [books, setbooks] = useState([]);
   const [query, setquery] = useState([]);
- 
+  const [querytext, setquerytext] = useState([]);
+
   const shelves=["read","wantToRead","currentlyReading"];
 
 
@@ -38,22 +39,59 @@ import './App.css'
 
    
   const changeShelf = async (book, shelf) => {
+
+    console.log(shelf)
     await BooksAPI.update(book, shelf);
+
     const books = await BooksAPI.getAll();
     setbooks(books);
       };
 
-  //console.log(books);
-   
+      const changeShelf2 = async (bookss, shelf) => {
+
+        console.log(shelf)
+        await BooksAPI.update(bookss, shelf);
     
+         
+        const books = await BooksAPI.search(querytext)
+        const ebooks = await BooksAPI.getAll();
+
+        let res = books.map((book) => {
+          const newbooks = ebooks.find(({ id }) => book.id === id);
+          return {
+            ...book,
+            shelf: newbooks?.shelf ?? 'None',
+          }
+        })
+      
+        
+     
+
+
+      setquery(res)  
+      console.log(res)
+     
+       
+   
+          
+        
+       
+          };
+        
+         // setquery(changeShelf2);
+
+  //console.log(books);
+  
+
+  //console.log(books);
   
    async function handleChanges (e) {
 
-      let querytexts= e.target.value
+    setquerytext(e.target.value)
      
      
-     if (querytexts!=='') {  
-     await BooksAPI.search(querytexts).then(res => {
+     if (querytext!=='') {  
+     await BooksAPI.search(querytext).then(res => {
 
       if (res.error !== 'empty query') 
       res = res.map((book) => {
@@ -115,7 +153,7 @@ import './App.css'
         key={book.id}
         shelves={shelves}
         books={book}
-        onChange={changeShelf}
+        onChange={changeShelf2 } 
        />
           
        ))) : (
