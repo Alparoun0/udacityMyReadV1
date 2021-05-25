@@ -22,7 +22,7 @@ import './App.css'
 
   const [books, setbooks] = useState([]);
   const [query, setquery] = useState([]);
-  const [querytext, setquerytext] = useState([]);
+  const [querytext, setquerytext] = useState('');
 
   const shelves=["read","wantToRead","currentlyReading"];
 
@@ -40,7 +40,7 @@ import './App.css'
    
   const changeShelf = async (book, shelf) => {
 
-    console.log(shelf)
+    //console.log(shelf)
     await BooksAPI.update(book, shelf);
 
     const books = await BooksAPI.getAll();
@@ -49,7 +49,7 @@ import './App.css'
 
       const changeShelf2 = async (bookss, shelf) => {
 
-        console.log(shelf)
+        //console.log(shelf)
         await BooksAPI.update(bookss, shelf);
     
          
@@ -69,7 +69,7 @@ import './App.css'
 
 
       setquery(res)  
-      console.log(res)
+      //console.log(res)
      
        
    
@@ -91,6 +91,7 @@ import './App.css'
      
      
      if (querytext!=='') {  
+
      await BooksAPI.search(querytext).then(res => {
 
       if (res.error !== 'empty query') 
@@ -103,7 +104,7 @@ import './App.css'
       })
       setquery(res)})
       
-       console.log(e.target.value)
+       //console.log(e.target.value)
     }
         
 
